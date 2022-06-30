@@ -13,7 +13,7 @@ const Form = ({ currentId, setCurrentId }) => {
     const classes = useStyles();
     const [postData, setPostData] = useState({ creator: '', title: '', message: '', tags: '', selectedFile: '' });
     const dispatch = useDispatch();
-    const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null);
+    const post = useSelector((state) => (currentId ? state.posts.find((p) => p._id === currentId) : null));
 
     useEffect(() => {
         if (post) setPostData(post);
@@ -22,7 +22,7 @@ const Form = ({ currentId, setCurrentId }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (currentId) {
-            dispatch(createPost(updatePost(currentId, postData)));
+            dispatch(updatePost(currentId, postData));
         } else {
             dispatch(createPost(postData));
         }
