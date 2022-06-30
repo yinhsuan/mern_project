@@ -5,7 +5,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
-import Delete from '@material-ui/icons/Delete';
+// import Delete from '@material-ui/icons/Delete';
 
 import useStyles from './styles';
 import { deletePost, likePost } from '../../../actions/posts';
