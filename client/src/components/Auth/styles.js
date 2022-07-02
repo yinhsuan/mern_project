@@ -26,5 +26,10 @@ export default makeStyles((theme) => ({
     },
     googleButton: {
         marginBottom: theme.spacing(2),
+        // display: 'block',
+        // width: '100%',
     },
+    switchButton: {
+        marginTop: theme.spacing(1),
+    }
 }));
