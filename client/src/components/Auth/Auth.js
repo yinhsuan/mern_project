@@ -10,23 +10,27 @@ import Input from './Input';
 import Icon from './Icon';
 
 import { GoogleOAuthProvider } from '@moeindana/google-oauth';
-import { GoogleLogin } from '@moeindana/google-oauth';
+import { GoogleLogin, useGoogleLogin } from '@moeindana/google-oauth';
+// import MyCustomButton from './MyCustomButton';
 
+const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' }
 
 const Auth = () => {
     const classes = useStyles();
     // const isSignup = true;
     const [showPassword, setShowPassword] = useState(false);
     const [isSignup, setIsSignup] = useState(false);
+    const [formData, setFormData] = useState(initialState);
     const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault(); // prevent refresh when submit
 
     };
-    const handleChange = () => {
-
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value })
     };
     const switchMode = () => {
         setIsSignup((prevIsSignup) => !prevIsSignup);
@@ -55,6 +59,9 @@ const Auth = () => {
         console.log(error);
         console.log("Google Sign In was unsuccessful. Try again later");
     };
+    // const login = useGoogleLogin({
+    //     onSuccess: tokenResponse => console.log(tokenResponse),
+    //   });
     
     
 
@@ -71,7 +78,7 @@ const Auth = () => {
                             { isSignup && (
                                 <>
                                     <Input name="firstName" label="First Name" handleChange={handleChange} autoFocus half />
-                                    <Input name="firstName" label="First Name" handleChange={handleChange} half />
+                                    <Input name="lastName" label="Last Name" handleChange={handleChange} half />
                                 </>
                             )}
                             <Input name="email" label="Email Address" handleChange={handleChange} type="email" />
@@ -81,6 +88,9 @@ const Auth = () => {
                         <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
                             { isSignup ? 'Sign Up' : 'Sign In' }
                         </Button>
+                        {/* <MyCustomButton onClick={() => login()}>
+                            Sign in with Google
+                        </MyCustomButton>; */}
                         <GoogleLogin
                             // render={(renderProps) => (
                             //     <Button className={classes.googleButton} color="primary" fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon />} variant="contained">
@@ -89,6 +99,7 @@ const Auth = () => {
                             // )}
                             // className={classes.googleButton}
                             // width='100%'
+                            // style={{width: "388px"}}
                             onSuccess={googleSuccess}
                             onFailure={googleFailure}
                         />
