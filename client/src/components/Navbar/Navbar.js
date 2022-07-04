@@ -36,7 +36,7 @@ const Navbar = () => {
                 <Typography component={Link} to="/" className={classes.heading} variant="h2" align="center">Memories</Typography>
                 <img className={classes.image} src={memories} alt="memories" height="60" />
             </div>
-            <Toolbar className={classes.toolbar}>
+            <Toolbar className={classes.toolbar}> 
                 {user ? (
                     <div className={classes.profile}>
                         <Avatar className={classes.purple} alt={user?.name} src={user?.imageUrl}>{user?.name?.charAt(0)}</Avatar>
