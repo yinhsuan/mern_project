@@ -5,6 +5,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 
 import postRoutes from './routes/posts.js';
+import userRoutes from './routes/users.js';
 
 const app = express();
 dotenv.config();
@@ -13,6 +14,7 @@ app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 app.use('/posts', postRoutes); // http://localhost:7777 => http://localhost:7777/posts
+app.use('/user', userRoutes);
 
 // https://www.mongodb.com/cloud/atlas
 // const CONNECTION_URL = "mongodb+srv://sandy:0123@cluster0.s6fz0.mongodb.net/?retryWrites=true&w=majority";

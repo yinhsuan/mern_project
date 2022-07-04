@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import useStyles from './styles';
 import Input from './Input';
 import Icon from './Icon';
+import { signin, signup } from '../../actions/auth';
 
 import { GoogleOAuthProvider } from '@moeindana/google-oauth';
 import { GoogleLogin, useGoogleLogin } from '@moeindana/google-oauth';
@@ -27,14 +28,23 @@ const Auth = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault(); // prevent refresh when submit
-
+        // sign up
+        if (isSignup) {
+            // navigate('/');
+            dispatch(signup(formData, navigate));
+        } 
+        // sign in
+        else {
+            // navigate('/');
+            dispatch(signin(formData, navigate));
+        }
     };
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     };
     const switchMode = () => {
         setIsSignup((prevIsSignup) => !prevIsSignup);
-        handleShowPassword(false);
+        setShowPassword(false);
     };
     const googleSuccess = async (res) => {
         console.log(res);
