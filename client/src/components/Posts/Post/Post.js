@@ -18,7 +18,6 @@ const Post = ({ post, setCurrentId }) => {
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem('profile'));
     const Likes = () => {
-        // return <div>HIHI</div>;
         if (post.likes.length > 0) {
           return post.likes.find((like) => like === (user?.googleId || user?._id)
           ) ? (
@@ -57,7 +56,6 @@ const Post = ({ post, setCurrentId }) => {
             </CardContent>
             <CardActions className={classes.cardActions}>
                 <Button size="small" color="primary" disable={user ? "true" : "false"} onClick={() => dispatch(likePost(post._id))}>
-                    {/* <ThumbUpAltIcon fontSize="small" /> Like &nbsp; {post.likeCount} */}
                     <Likes />
                 </Button>
                 {( user?.googleId === post?.creator || user?._id === post?.creator ) && (
