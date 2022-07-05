@@ -47,7 +47,7 @@ const Auth = () => {
         setShowPassword(false);
     };
     const googleSuccess = async (res) => {
-        console.log(res);
+        // console.log(res);
         // const result = res?.profileObj; // cannot get property profileObj of undefined
         // const token = res?.tokenId;
         const token = res?.credential;

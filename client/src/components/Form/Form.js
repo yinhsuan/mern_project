@@ -21,9 +21,9 @@ const Form = ({ currentId, setCurrentId }) => {
     }, [post])
 
     const handleSubmit = async (e) => {
-        console.log("hihi");
+        // console.log("hihi");
         e.preventDefault();
-        console.log("user: ", user);
+        // console.log("user: ", user);
         if (currentId) {
             console.log("updatePost");
             dispatch(updatePost(currentId, {  ...postData, name: user?.name }));
