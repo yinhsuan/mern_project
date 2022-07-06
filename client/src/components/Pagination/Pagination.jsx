@@ -6,15 +6,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import useStyles from './styles';
 import { getPosts } from '../../actions/posts';
 
-const Paginate = ({ page }) => {
+const Paginate = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        if (page) {
-            dispatch(getPosts(page));
-        }
-    }, [page]);
+    // useEffect(() => {
+    //     if (page) {
+    //         dispatch(getPosts(page));
+    //     }
+    // }, [page]);
 
     return (
         <Pagination 
