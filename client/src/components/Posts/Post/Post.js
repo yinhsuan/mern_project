@@ -1,11 +1,12 @@
 import React from 'react';
-import { Card, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core';
+import { Card, CardActions, CardContent, CardMedia, Button, Typography, ButtonBase  } from '@material-ui/core';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbUpAltOutlined from "@material-ui/icons/ThumbUpAltOutlined";
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 // import Delete from '@material-ui/icons/Delete';
 
 import useStyles from './styles';
@@ -16,6 +17,7 @@ import { deletePost, likePost } from '../../../actions/posts';
 const Post = ({ post, setCurrentId }) => {
     const classes = useStyles();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const user = JSON.parse(localStorage.getItem('profile'));
     const Likes = () => {
         if (post.likes.length > 0) {
@@ -29,31 +31,34 @@ const Post = ({ post, setCurrentId }) => {
         return <><ThumbUpAltOutlined fontSize="small" />&nbsp;Like</>;
     };
 
+    const openPost = () => navigate(`/posts/${post._id}`);
+
     return (
         <Card className={classes.card} raised elevation={6}>
-            <CardMedia className={classes.media} image={post.selectedFile} title={post.title} />
-            <div className={classes.overlay}>
-                <Typography variant="h6">{post.name}</Typography>
-                <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
-            </div>
-            {( user?.googleId === post?.creator || user?._id === post?.creator ) && (
-                <div className={classes.overlay2}>
-                    <Button 
-                        style={{color: 'white'}} 
-                        size="small" 
-                        onClick={() => setCurrentId(post._id)}>
-                        <MoreHorizIcon fontSize="medium" />
-                    </Button>
+            <ButtonBase className={classes.cardAction} onClick={openPost}>
+                <CardMedia className={classes.media} image={post.selectedFile} title={post.title} />
+                <div className={classes.overlay}>
+                    <Typography variant="h6">{post.name}</Typography>
+                    <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
                 </div>
-            )}
-            
-            <div className={classes.details}>
-                <Typography variant="body2" color="textSecondary">{post.tags.map((tag) => `#${tag}`)}</Typography>
-            </div>
-            <Typography className={classes.title} variant="h5" gutterBottom>{post.title}</Typography>
-            <CardContent>
-                <Typography variant="body2" color="textSecondary" component="p">{post.message}</Typography>
-            </CardContent>
+                {( user?.googleId === post?.creator || user?._id === post?.creator ) && (
+                    <div className={classes.overlay2}>
+                        <Button
+                            style={{color: 'white'}}
+                            size="small"
+                            onClick={() => setCurrentId(post._id)}>
+                            <MoreHorizIcon fontSize="medium" />
+                        </Button>
+                    </div>
+                )}
+                <div className={classes.details}>
+                    <Typography variant="body2" color="textSecondary">{post.tags.map((tag) => `#${tag}`)}</Typography>
+                </div>
+                <Typography className={classes.title} variant="h5" gutterBottom>{post.title}</Typography>
+                <CardContent>
+                    <Typography variant="body2" color="textSecondary" component="p">{post.message}</Typography>
+                </CardContent>
+            </ButtonBase>
             <CardActions className={classes.cardActions}>
                 <Button size="small" color="primary" disable={user ? "true" : "false"} onClick={() => dispatch(likePost(post._id))}>
                     <Likes />
