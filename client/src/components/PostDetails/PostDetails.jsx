@@ -10,7 +10,7 @@ import { getPost, getPostBySearch } from '../../actions/posts';
 const PostDetails = () => {
     const { post, posts, isLoading } = useSelector((state) => state.posts);
     const dispatch = useDispatch();
-    const navigation = useNavigate();
+    const navigate = useNavigate();
     const classes = useStyles();
     const { id } = useParams();
     console.log('post:', post);
