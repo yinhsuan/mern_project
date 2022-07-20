@@ -29,9 +29,9 @@ export const getPosts = (page) => async (dispatch) => {
 export const getPostBySearch = (searchQuery) => async (dispatch) => {
     try {
         dispatch({ type: START_LOADING });
-        console.log("searchQuery: ", searchQuery)
+        // console.log("searchQuery: ", searchQuery)
         const { data: { data } } = await api.fetchPostsBySearch(searchQuery);
-        console.log("data: ", data);
+        // console.log("data: ", data);
         dispatch({ type: FETCH_BY_SEARCH, payload: data });
         dispatch({ type: END_LOADING });
     } catch (error) {

@@ -31,12 +31,17 @@ export const getPosts = async (req, res) => {
 
 export const getPostsBySearch = async (req, res) => {
     const { searchQuery, tags } = req.query;
-    console.log('searchQuery' + searchQuery)
-    console.log('tags' + tags)
-
+    console.log('cp 0');
+    console.log('searchQuery' + searchQuery);
+    console.log('cp 1');
+    console.log('tags' + tags);
+    console.log('cp 2');
     try {
+        console.log('cp 3');
         const title = new RegExp(searchQuery, 'i');
+        console.log('cp 4');
         const posts = await PostMessage.find({ $or: [ { title }, { tags: { $in: tags.split(',')} } ] });
+        console.log('cp 5');
         res.json({ data: posts });
     } catch (error) {
         res.status(404).json({ message: error });

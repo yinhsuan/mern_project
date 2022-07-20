@@ -13,7 +13,7 @@ const PostDetails = () => {
     const navigate = useNavigate();
     const classes = useStyles();
     const { id } = useParams();
-    console.log('post:', post);
+    // console.log('post:', post);
 
     useEffect(() => {
         dispatch(getPost(id));
@@ -64,7 +64,7 @@ const PostDetails = () => {
                     <Divider />
                     <div className={classes.recommendedPosts}>
                         {recommendedPosts.map(({ title, message, name, likes, selectedFile, _id }) => (
-                            <div>
+                            <div key={title}>
                                 {title}
                             </div>
                         ))}
