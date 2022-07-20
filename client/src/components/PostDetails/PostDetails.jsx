@@ -19,11 +19,11 @@ const PostDetails = () => {
         dispatch(getPost(id));
     }, [id]);
 
-    useEffect(() => {
-        if(post) {
-            dispatch(getPostBySearch({ search: 'none', tags: post?.tags.join(',') }));
-        }
-    }, [post]);
+    // useEffect(() => {
+    //     if(post) {
+    //         dispatch(getPostBySearch({ search: 'none', tags: post?.tags.join(',') }));
+    //     }
+    // }, [post]);
 
     if (!post) {
         return null;
@@ -36,6 +36,7 @@ const PostDetails = () => {
     }
 
     const recommendedPosts = posts.filter(({ _id }) => _id !== post._id);
+    const openPost = (_id) => navigate(`/posts/${_id}`);
     console.log("recommendedPosts: ", recommendedPosts);
 
     return (
@@ -64,7 +65,7 @@ const PostDetails = () => {
                     <Divider />
                     <div className={classes.recommendedPosts}>
                         {recommendedPosts.map(({ title, message, name, likes, selectedFile, _id }) => (
-                            <div key={title}>
+                            <div style={{ margin: '20px', cursor: 'pointer' }} onClick={() => openPost(_id)} key={_id}>
                                 {title}
                             </div>
                         ))}
