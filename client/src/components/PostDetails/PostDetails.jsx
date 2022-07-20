@@ -66,7 +66,11 @@ const PostDetails = () => {
                     <div className={classes.recommendedPosts}>
                         {recommendedPosts.map(({ title, message, name, likes, selectedFile, _id }) => (
                             <div style={{ margin: '20px', cursor: 'pointer' }} onClick={() => openPost(_id)} key={_id}>
-                                {title}
+                                <Typography gutterBottom variant="h6">{title}</Typography>
+                                <Typography gutterBottom variant="subtitle2">{name}</Typography>
+                                <Typography gutterBottom variant="subtitle2">{message}</Typography>
+                                <Typography gutterBottom variant="subtitle1">Likes: {likes.length}</Typography>
+                                <img src={selectedFile} width="200px" />
                             </div>
                         ))}
                     </div>
